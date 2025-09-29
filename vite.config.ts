@@ -43,7 +43,7 @@ export default defineConfig({
       }
     })
   ],
-  base: '/MortgageCalculator/',
+  base: '/',
   build: {
     outDir: 'dist',
     sourcemap: true
