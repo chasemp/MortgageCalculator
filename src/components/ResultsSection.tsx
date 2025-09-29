@@ -1,14 +1,18 @@
 import { MortgageResults, MortgageInputs } from '../types';
 import { formatCurrency } from '../utils/mortgageCalculations';
+import { ExtraPaymentsSection } from './ExtraPaymentsSection';
+import { AmortizationSchedule } from './AmortizationSchedule';
+import { MortgageCharts } from './MortgageCharts';
 
 interface ResultsSectionProps {
   results: MortgageResults;
   inputs: MortgageInputs;
   activeSection: string;
   onSetActiveSection: (section: string) => void;
+  onUpdateInputs?: (updates: Partial<MortgageInputs>) => void;
 }
 
-export function ResultsSection({ results, inputs, activeSection, onSetActiveSection }: ResultsSectionProps) {
+export function ResultsSection({ results, inputs, activeSection, onSetActiveSection, onUpdateInputs }: ResultsSectionProps) {
   const { monthlyPayment, totals, payoffDate, pmiStopMonth } = results;
 
   return (
@@ -107,6 +111,15 @@ export function ResultsSection({ results, inputs, activeSection, onSetActiveSect
             </div>
           )}
           
+          {totals.interestSavings > 0 && (
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-green-600 dark:text-green-400">Interest Savings</span>
+              <span className="font-medium text-green-600 dark:text-green-400">
+                {formatCurrency(totals.interestSavings, inputs.currency, inputs.locale)}
+              </span>
+            </div>
+          )}
+          
           <div className="pt-3 border-t border-gray-200 dark:border-gray-600">
             <div className="flex justify-between items-center">
               <span className="text-base font-semibold text-gray-900 dark:text-white">Total Cost</span>
@@ -164,23 +177,27 @@ export function ResultsSection({ results, inputs, activeSection, onSetActiveSect
         
         <div className="p-6">
           {activeSection === 'schedule' && (
-            <div className="text-center text-gray-500 dark:text-gray-400">
-              <p>Amortization schedule will be displayed here</p>
-              <p className="text-sm mt-2">Coming in M4: Visualization & Export</p>
-            </div>
+            <AmortizationSchedule
+              schedule={results.schedule}
+              inputs={inputs}
+            />
           )}
           
           {activeSection === 'charts' && (
-            <div className="text-center text-gray-500 dark:text-gray-400">
-              <p>Charts and visualizations will be displayed here</p>
-              <p className="text-sm mt-2">Coming in M4: Visualization & Export</p>
-            </div>
+            <MortgageCharts
+              schedule={results.schedule}
+              inputs={inputs}
+            />
           )}
           
-          {activeSection === 'extras' && (
-            <div className="text-center text-gray-500 dark:text-gray-400">
-              <p>Extra payments configuration will be displayed here</p>
-              <p className="text-sm mt-2">Coming in M3: Extras & Effects</p>
+          {activeSection === 'extras' && onUpdateInputs && (
+            <div className="hidden lg:block">
+              <ExtraPaymentsSection
+                inputs={inputs}
+                onUpdateInputs={onUpdateInputs}
+                activeSection={activeSection}
+                onSetActiveSection={onSetActiveSection}
+              />
             </div>
           )}
         </div>
