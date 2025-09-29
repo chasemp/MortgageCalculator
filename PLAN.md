@@ -94,9 +94,17 @@ For each month: interest = currentBalance × r; scheduledPrincipal = M − inter
 ## UX and Mobile Optimization
 - Mobile-first single-column layout; collapsible sections: Inputs, Extras, Results, Schedule, Charts
 - Sticky summary bar with monthly payment (mortgage-only vs with escrow) and payoff date
-- Inputs: numeric inputmode, toggle down payment % vs amount, validation
+- Inputs: numeric inputmode, toggle down payment % vs amount, validation with real-time feedback
 - Results: clear principal vs interest separation; taxes/insurance/HOA separated; PMI stop badge; CSV export
 - Accessibility: semantic HTML, labels, keyboard navigable, visible focus, contrast; accessible chart summaries
+- **Enhanced UX Features**:
+  - Touch-friendly input controls with proper sizing (min 44px touch targets)
+  - Smooth animations and transitions for state changes
+  - Loading states and progress indicators for calculations
+  - Error handling with clear, actionable messages
+  - Theme toggle (light/dark mode) with system preference detection
+  - Haptic feedback on mobile devices where supported
+  - Gesture support for mobile interactions (swipe, pinch)
 
 ## PWA and Static Hosting (GitHub Pages)
 - Build as a single-page app using standard query params
@@ -110,6 +118,28 @@ For each month: interest = currentBalance × r; scheduledPrincipal = M − inter
 - Lightweight CSS (Tailwind or CSS modules)
 - Chart.js with accessible data table fallback
 - Custom URL/state hooks; Vitest + Testing Library; Prettier + ESLint
+
+## UI/UX Insights from Reference Repositories
+
+### From chasemp/blockdoku (PWA Game)
+- **PWA Implementation**: Clean manifest.json structure with proper icons and theme colors
+- **Responsive Design**: Mobile-first approach with touch-friendly interactions
+- **Theme System**: CSS themes directory suggests customizable UI themes
+- **Offline Capabilities**: Service worker implementation for offline functionality
+- **Asset Organization**: Well-structured assets and icons directories
+
+### From chasemp/mealplanner (Planning App)
+- **Data Management**: Clean separation of data models and UI components
+- **User Flow**: Intuitive planning interface with clear input/output patterns
+- **Documentation**: Comprehensive README, ROADMAP, and deployment guides
+- **Development Workflow**: Clear development server setup and deployment process
+
+### Applied UI/UX Patterns
+- **Mobile-First Design**: Touch-friendly inputs with proper input modes
+- **Progressive Enhancement**: Core functionality works without JavaScript, enhanced with PWA features
+- **Clear Visual Hierarchy**: Sticky summary bar with key metrics always visible
+- **Accessible Forms**: Proper labels, validation, and keyboard navigation
+- **Theme Support**: Light/dark mode toggle for better user experience
 
 ## Testing Plan
 - Unit: payment formula edge cases; amortization accuracy; PMI stop; extra payments; totals integrity
