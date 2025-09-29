@@ -17,6 +17,31 @@ export function calculateMonthlyPayment(
 }
 
 /**
+ * Calculate total interest paid without extra payments
+ */
+export function calculateInterestWithoutExtras(
+  loanAmount: number,
+  monthlyRate: number,
+  months: number
+): number {
+  const monthlyPayment = calculateMonthlyPayment(loanAmount, monthlyRate, months);
+  let currentBalance = loanAmount;
+  let totalInterest = 0;
+  
+  for (let month = 1; month <= months && currentBalance > 0; month++) {
+    const interest = currentBalance * monthlyRate;
+    const principal = Math.min(monthlyPayment - interest, currentBalance);
+    
+    totalInterest += interest;
+    currentBalance = Math.max(0, currentBalance - principal);
+    
+    if (currentBalance <= 0) break;
+  }
+  
+  return totalInterest;
+}
+
+/**
  * Calculate loan amount from price and down payment
  */
 export function calculateLoanAmount(inputs: MortgageInputs): number {
@@ -149,6 +174,11 @@ export function generateAmortizationSchedule(inputs: MortgageInputs): MortgageRe
     }
   }
   
+  // Calculate interest savings from extra payments
+  // This is the difference between interest paid with extra payments vs without
+  const interestWithoutExtras = calculateInterestWithoutExtras(loanAmount, monthlyRate, months);
+  const interestSavings = Math.max(0, interestWithoutExtras - cumulativeInterest);
+
   // Calculate totals
   const totals: MortgageTotals = {
     principal: cumulativePrincipal,
@@ -163,7 +193,7 @@ export function generateAmortizationSchedule(inputs: MortgageInputs): MortgageRe
       (inputs.annualTaxes / 12) * schedule.length +
       (inputs.annualInsurance / 12) * schedule.length +
       inputs.hoaMonthly * schedule.length,
-    interestSavings: 0 // TODO: Calculate interest savings from extra payments
+    interestSavings
   };
   
   const monthlyEscrow = inputs.includeEscrow ? 

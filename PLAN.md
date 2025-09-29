@@ -151,12 +151,39 @@ For each month: interest = currentBalance × r; scheduledPrincipal = M − inter
 - Disclaimer: results are estimates; consult your lender
 
 ## Milestones
-- M1: Foundations – scaffold, UI shell, state + URL, basic PWA
-- M2: Core Calculations – payment formula, amortization engine, escrow, PMI
-- M3: Extras & Effects – extra payments, totals, payoff acceleration messaging
-- M4: Visualization & Export – charts, schedule table, CSV export
-- M5: Share & PWA Polish – share URL, offline tweaks, icons
-- M6: QA & Release – tests, a11y, deploy to GitHub Pages
+- ✅ M1: Foundations – scaffold, UI shell, state + URL, basic PWA
+- ✅ M2: Core Calculations – payment formula, amortization engine, escrow, PMI
+- ✅ M3: Extras & Effects – extra payments, totals, payoff acceleration messaging
+- ✅ M4: Visualization & Export – charts, schedule table, CSV export
+- ✅ M5: Share & PWA Polish – share URL, offline tweaks, icons
+- 🔄 M6: QA & Release – tests, a11y, deploy to GitHub Pages
+
+## Current Status (Updated)
+
+### ✅ Completed Features
+- **Core Functionality**: Complete mortgage calculation engine with amortization
+- **Extra Payments**: Monthly, annual, and one-time extra payment support
+- **Interest Savings**: Automatic calculation and display of interest savings from extra payments
+- **Visualizations**: Interactive charts showing balance over time and principal vs interest
+- **Amortization Schedule**: Full schedule table with pagination, search, and CSV export
+- **PWA Features**: Service worker, manifest, offline capability, installable
+- **URL Sharing**: Complete URL encoding/decoding for sharing scenarios
+- **Theme Support**: Light/dark/system theme switching
+- **Responsive Design**: Mobile-first design with touch-friendly controls
+- **Toast Notifications**: User feedback for actions like sharing and copying
+
+### 🔄 In Progress
+- **Testing**: Unit and integration tests for core functionality
+- **Accessibility**: ARIA labels, keyboard navigation improvements
+- **Deployment**: GitHub Actions for automated deployment
+
+### 📊 Technical Implementation
+- **Framework**: React 18 + TypeScript + Vite
+- **Styling**: Tailwind CSS with dark mode support
+- **Charts**: Chart.js with react-chartjs-2
+- **PWA**: Vite PWA plugin with Workbox
+- **State Management**: Custom hooks with URL persistence
+- **Build Size**: ~358KB gzipped (includes Chart.js)
 
 ## Acceptance Criteria
 - Adjusting any input updates mortgage-only, with-escrow total, payoff date, totals (principal vs interest), PMI stop month

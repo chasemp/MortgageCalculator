@@ -5,9 +5,10 @@ interface HeaderProps {
   onToggleTheme: () => void;
   onReset: () => void;
   onShare: () => string;
+  onShowToast: (message: string, type: 'success' | 'error' | 'info') => void;
 }
 
-export function Header({ theme, onToggleTheme, onReset, onShare }: HeaderProps) {
+export function Header({ theme, onToggleTheme, onReset, onShare, onShowToast }: HeaderProps) {
   const handleShare = async () => {
     const url = onShare();
     
@@ -25,10 +26,10 @@ export function Header({ theme, onToggleTheme, onReset, onShare }: HeaderProps) 
       // Fallback: copy to clipboard
       try {
         await navigator.clipboard.writeText(url);
-        // TODO: Show toast notification
-        console.log('URL copied to clipboard');
+        onShowToast('URL copied to clipboard!', 'success');
       } catch (error) {
         console.error('Failed to copy to clipboard');
+        onShowToast('Failed to copy URL', 'error');
       }
     }
   };
