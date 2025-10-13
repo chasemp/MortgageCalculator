@@ -280,3 +280,4 @@ navigator.serviceWorker.getRegistrations().then(registrations =>
 - [PWA Guidelines](https://web.dev/progressive-web-apps/)
 - [React TypeScript Cheatsheet](https://react-typescript-cheatsheet.netlify.app/)
 
+
