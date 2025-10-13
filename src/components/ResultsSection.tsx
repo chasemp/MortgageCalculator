@@ -17,6 +17,30 @@ export function ResultsSection({ results, inputs, activeSection, onSetActiveSect
 
   return (
     <div className="space-y-6">
+      {/* Property Link Card */}
+      {inputs.propertyLink && (
+        <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800 p-4">
+          <div className="flex items-start">
+            <div className="flex-shrink-0">
+              <span className="text-blue-600 dark:text-blue-400 text-lg">🏠</span>
+            </div>
+            <div className="ml-3 flex-1">
+              <h3 className="text-sm font-medium text-blue-800 dark:text-blue-200">
+                Property Listing
+              </h3>
+              <a
+                href={inputs.propertyLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-blue-700 dark:text-blue-300 hover:text-blue-900 dark:hover:text-blue-100 underline break-all mt-1 inline-block"
+              >
+                {inputs.propertyLink}
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Summary Card */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
@@ -132,7 +156,7 @@ export function ResultsSection({ results, inputs, activeSection, onSetActiveSect
       </div>
 
       {/* PMI Information */}
-      {pmiStopMonth && (
+      {totals.pmi > 0 && pmiStopMonth && (
         <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800 p-4">
           <div className="flex items-center">
             <div className="flex-shrink-0">

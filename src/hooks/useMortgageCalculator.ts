@@ -9,6 +9,7 @@ const defaultInputs: MortgageInputs = {
   termYears: 30,
   aprPercent: 6.5,
   startYearMonth: new Date().toISOString().slice(0, 7), // Current year-month
+  propertyLink: '',
   annualTaxes: 4800,
   annualInsurance: 1500,
   hoaMonthly: 0,
