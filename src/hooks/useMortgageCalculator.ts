@@ -4,7 +4,7 @@ import { generateAmortizationSchedule } from '../utils/mortgageCalculations';
 
 // Default inputs
 const defaultInputs: MortgageInputs = {
-  price: 450000,
+  price: 250000,
   downPaymentPercent: 20,
   termYears: 30,
   aprPercent: 6.5,

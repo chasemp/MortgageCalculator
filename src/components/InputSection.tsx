@@ -191,7 +191,7 @@ export function InputSection({ inputs, onUpdateInputs }: InputSectionProps) {
               value={inputs.price}
               onChange={(e) => handleInputChange('price', Number(e.target.value))}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white"
-              placeholder="450000"
+              placeholder="250000"
             />
           </div>
 

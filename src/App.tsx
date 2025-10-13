@@ -95,7 +95,6 @@ function App() {
           </div>
         </main>
         
-        
         <ToastContainer toasts={toasts} onRemoveToast={removeToast} />
       </div>
     </ErrorBoundary>
