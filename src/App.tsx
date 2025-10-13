@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useMortgageCalculator } from './hooks/useMortgageCalculator';
 import { Header } from './components/Header';
+import { PropertyDetailsSection } from './components/PropertyDetailsSection';
 import { InputSection } from './components/InputSection';
 import { ExtraPaymentsSection } from './components/ExtraPaymentsSection';
 import { ResultsSection } from './components/ResultsSection';
@@ -52,6 +53,11 @@ function App() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Input Section */}
             <div className="space-y-6">
+              <PropertyDetailsSection
+                inputs={inputs}
+                onUpdateInputs={updateInputs}
+              />
+              
               <InputSection
                 inputs={inputs}
                 onUpdateInputs={updateInputs}
