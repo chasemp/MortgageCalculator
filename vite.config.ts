@@ -10,8 +10,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'splash/*.png'],
       manifest: {
-        name: 'Mortgage Calculator PWA',
-        short_name: 'MortgageCalc',
+        name: 'Morty the Mortgage Calculator',
+        short_name: 'Morty',
         description: 'A comprehensive mortgage calculator with amortization, extra payments, and PWA features',
         theme_color: '#3B82F6',
         background_color: '#ffffff',
