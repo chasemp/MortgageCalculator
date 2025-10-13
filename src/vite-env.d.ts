@@ -1,12 +1,6 @@
 /// <reference types="vite/client" />
 
-interface ImportMetaEnv {
-  readonly MODE: string
-  readonly DEV: boolean
-  readonly PROD: boolean
-  readonly SSR: boolean
-}
-
-interface ImportMeta {
-  readonly env: ImportMetaEnv
-}
+// Global build-time constants
+declare const __APP_VERSION__: string;
+declare const __BUILD_TIME__: string;
+declare const __BUILD_DATE__: string;
