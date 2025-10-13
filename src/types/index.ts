@@ -9,6 +9,7 @@ export interface MortgageInputs {
   aprPercent: number;
   startYearMonth: string; // Format: "YYYY-MM"
   propertyLink?: string; // Optional URL to property listing
+  propertyNotes?: string; // Optional freeform notes about the property
   
   // Additional costs
   annualTaxes: number;
