@@ -15,18 +15,22 @@ export function Header({ theme, onToggleTheme, onReset, onShare, onShowToast }: 
     if (navigator.share) {
       try {
         await navigator.share({
-          title: 'Mortgage Calculator Results',
-          text: 'Check out my mortgage calculation results',
+          title: 'Mortgage Calculator - morty.523.life',
+          text: 'Check out this mortgage calculation with all the details pre-filled',
           url
         });
+        onShowToast('Shared successfully!', 'success');
       } catch (error) {
-        console.log('Share cancelled or failed');
+        // User cancelled share or share failed
+        if (error instanceof Error && error.name !== 'AbortError') {
+          console.error('Share failed:', error);
+        }
       }
     } else {
       // Fallback: copy to clipboard
       try {
         await navigator.clipboard.writeText(url);
-        onShowToast('URL copied to clipboard!', 'success');
+        onShowToast('Link copied to clipboard! Share it with others to show them your calculation.', 'success');
       } catch (error) {
         console.error('Failed to copy to clipboard');
         onShowToast('Failed to copy URL', 'error');

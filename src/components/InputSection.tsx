@@ -96,13 +96,14 @@ export function InputSection({ inputs, onUpdateInputs }: InputSectionProps) {
               <input
                 type="number"
                 inputMode="numeric"
-                value={downPaymentMode === 'amount' ? inputs.downPaymentAmount || 0 : (inputs.price * (inputs.downPaymentPercent || 0)) / 100}
+                step={downPaymentMode === 'amount' ? '1000' : '0.1'}
+                value={downPaymentMode === 'amount' ? (inputs.downPaymentAmount || 0) : (inputs.downPaymentPercent || 0)}
                 onChange={(e) => {
                   const value = Number(e.target.value);
                   if (downPaymentMode === 'amount') {
                     handleInputChange('downPaymentAmount', value);
                   } else {
-                    handleInputChange('downPaymentPercent', (value / inputs.price) * 100);
+                    handleInputChange('downPaymentPercent', value);
                   }
                 }}
                 className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white"
@@ -112,6 +113,12 @@ export function InputSection({ inputs, onUpdateInputs }: InputSectionProps) {
                 {downPaymentMode === 'amount' ? '$' : '%'}
               </span>
             </div>
+            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+              {downPaymentMode === 'amount' 
+                ? `${((inputs.downPaymentAmount || 0) / inputs.price * 100).toFixed(1)}% of home price`
+                : `$${((inputs.downPaymentPercent || 0) / 100 * inputs.price).toLocaleString('en-US', { maximumFractionDigits: 0 })} down payment`
+              }
+            </p>
           </div>
 
           {/* Loan Term and Interest Rate */}
@@ -156,6 +163,23 @@ export function InputSection({ inputs, onUpdateInputs }: InputSectionProps) {
               onChange={(e) => handleInputChange('startYearMonth', e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white"
             />
+          </div>
+
+          {/* Property Link */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Property Link (Optional)
+            </label>
+            <input
+              type="url"
+              value={inputs.propertyLink || ''}
+              onChange={(e) => handleInputChange('propertyLink', e.target.value)}
+              placeholder="https://example.com/property/123"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white"
+            />
+            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+              Add a link to the property listing for easy reference
+            </p>
           </div>
 
           {/* Additional Costs */}
