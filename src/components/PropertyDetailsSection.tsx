@@ -112,7 +112,7 @@ export function PropertyDetailsSection({ inputs, onUpdateInputs }: PropertyDetai
                     <img 
                       src={inputs.propertyImageUrl} 
                       alt={inputs.propertyAddress || 'Property'}
-                      className="w-full h-32 object-cover rounded-md mb-2"
+                      className="w-full max-h-48 object-contain rounded-md mb-2 bg-white dark:bg-gray-800"
                       onError={(e) => {
                         (e.target as HTMLImageElement).style.display = 'none';
                       }}
