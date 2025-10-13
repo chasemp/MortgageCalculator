@@ -159,6 +159,67 @@ export function PropertyDetailsSection({ inputs, onUpdateInputs }: PropertyDetai
             )}
           </div>
 
+          {/* Manual Property Details */}
+          <div className="pt-4 border-t border-gray-200 dark:border-gray-600">
+            <h3 className="text-sm font-medium text-gray-900 dark:text-white mb-3">
+              Manual Entry (Optional)
+            </h3>
+            <div className="space-y-3">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Property Address
+                </label>
+                <input
+                  type="text"
+                  value={inputs.propertyAddress || ''}
+                  onChange={(e) => handleInputChange('propertyAddress', e.target.value)}
+                  placeholder="123 Main St, City, ST 12345"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white"
+                />
+                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                  Enter address manually if auto-fetch doesn't work
+                </p>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Property Image URL
+                </label>
+                <input
+                  type="url"
+                  value={inputs.propertyImageUrl || ''}
+                  onChange={(e) => handleInputChange('propertyImageUrl', e.target.value)}
+                  placeholder="https://example.com/property-image.jpg"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white"
+                />
+                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                  Add a direct link to a property image
+                </p>
+              </div>
+
+              {/* Manual Entry Display */}
+              {(inputs.propertyAddress || inputs.propertyImageUrl) && (
+                <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-md border border-gray-200 dark:border-gray-600">
+                  {inputs.propertyImageUrl && (
+                    <img 
+                      src={inputs.propertyImageUrl} 
+                      alt={inputs.propertyAddress || 'Property'}
+                      className="w-full h-32 object-cover rounded-md mb-2"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = 'none';
+                      }}
+                    />
+                  )}
+                  {inputs.propertyAddress && (
+                    <p className="text-sm font-medium text-gray-900 dark:text-white">
+                      {inputs.propertyAddress}
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+
           {/* Property Notes */}
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
