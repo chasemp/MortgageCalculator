@@ -71,3 +71,4 @@ After generating icons, update:
 
 process.exit(0);
 
+
