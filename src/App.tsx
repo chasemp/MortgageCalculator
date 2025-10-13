@@ -7,6 +7,7 @@ import { ResultsSection } from './components/ResultsSection';
 import { LoadingSpinner } from './components/LoadingSpinner';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { ToastContainer } from './components/Toast';
+import Footer from './components/Footer';
 
 function App() {
   const {
@@ -94,6 +95,8 @@ function App() {
             </div>
           </div>
         </main>
+        
+        <Footer />
         
         <ToastContainer toasts={toasts} onRemoveToast={removeToast} />
       </div>
