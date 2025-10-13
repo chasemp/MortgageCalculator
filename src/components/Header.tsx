@@ -63,7 +63,7 @@ export function Header({ theme, onToggleTheme, onReset, onShare, onShowToast }: 
             />
             <div className="flex items-center space-x-3">
               <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-                Mortgage Calculator
+                Morty
               </h1>
               <span className="text-xs px-2 py-1 bg-primary-500 text-white rounded-full font-medium">
                 PWA
