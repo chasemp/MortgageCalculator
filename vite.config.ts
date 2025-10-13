@@ -45,7 +45,9 @@ export default defineConfig({
   ],
   base: '/',
   build: {
-    outDir: 'dist',
-    sourcemap: true
-  }
+    outDir: 'docs',
+    sourcemap: true,
+    emptyOutDir: true
+  },
+  publicDir: 'public'
 })
