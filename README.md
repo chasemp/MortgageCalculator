@@ -93,31 +93,31 @@ MortgageCalculator/
 
 ## 📦 Deployment
 
-### Automatic Deployment (Recommended)
+### Deployment Process
 
-1. Make changes and commit:
+1. Make changes to source code
+2. Build for production:
+   ```bash
+   npm run build
+   # → Builds to /docs folder
+   ```
+
+3. Commit and push:
    ```bash
    git add .
    git commit -m "feat: Add new feature"
    git push origin main
    ```
 
-2. GitHub Actions automatically:
-   - Builds the app (`npm run build`)
-   - Deploys to GitHub Pages
+4. GitHub Pages automatically serves from `/docs` folder
    - Live at https://morty.523.life/ (1-2 minutes)
+   - No build step needed on GitHub
 
-### Manual Deployment
+### Important Notes
 
-```bash
-# Build production version
-npm run build
-
-# Commit build output
-git add docs/
-git commit -m "build: Update production build"
-git push origin main
-```
+- **Always build before committing**: Run `npm run build` to update the `/docs` folder
+- **Commit `/docs` folder**: This is your production build that GitHub Pages serves
+- **No GitHub Actions**: The app deploys directly from the `/docs` folder (following the peadoubleueh PWA template pattern)
 
 ### Custom Domain Setup
 
