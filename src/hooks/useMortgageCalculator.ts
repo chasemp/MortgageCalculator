@@ -21,7 +21,12 @@ const defaultInputs: MortgageInputs = {
   extraOneTime: [],
   currency: 'USD',
   locale: 'en-US',
-  version: 1
+  version: 1,
+  propertyTitle: '',
+  propertyLink: '',
+  propertyAddress: '',
+  propertyImageUrl: '',
+  propertyNotes: ''
 };
 
 const defaultUIState: UIState = {

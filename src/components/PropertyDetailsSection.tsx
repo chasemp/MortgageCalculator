@@ -1,16 +1,28 @@
 import { useState } from 'react';
 import { MortgageInputs } from '../types';
+import { savedPropertiesStorage } from '../utils/savedProperties';
 
 interface PropertyDetailsSectionProps {
   inputs: MortgageInputs;
   onUpdateInputs: (updates: Partial<MortgageInputs>) => void;
+  onShowToast?: (message: string, type: 'success' | 'error' | 'info') => void;
 }
 
-export function PropertyDetailsSection({ inputs, onUpdateInputs }: PropertyDetailsSectionProps) {
+export function PropertyDetailsSection({ inputs, onUpdateInputs, onShowToast }: PropertyDetailsSectionProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleInputChange = (field: keyof MortgageInputs, value: any) => {
     onUpdateInputs({ [field]: value });
+  };
+
+  const handleSaveProperty = () => {
+    try {
+      savedPropertiesStorage.save(inputs);
+      onShowToast?.('Property saved successfully!', 'success');
+    } catch (error) {
+      console.error('Failed to save property:', error);
+      onShowToast?.('Failed to save property', 'error');
+    }
   };
 
   return (
@@ -29,6 +41,23 @@ export function PropertyDetailsSection({ inputs, onUpdateInputs }: PropertyDetai
       
       {isExpanded && (
         <div className="px-4 pb-4 space-y-4">
+          {/* Property Title */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Property Name / Title
+            </label>
+            <input
+              type="text"
+              value={inputs.propertyTitle || ''}
+              onChange={(e) => handleInputChange('propertyTitle', e.target.value)}
+              placeholder="e.g., Dream Home in Vegas, Mom's House, Investment Property #3"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white"
+            />
+            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+              Give this property a memorable name
+            </p>
+          </div>
+
           {/* Property Link */}
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -142,6 +171,19 @@ export function PropertyDetailsSection({ inputs, onUpdateInputs }: PropertyDetai
             />
             <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
               Freeform notes for your reference
+            </p>
+          </div>
+
+          {/* Save Button */}
+          <div className="pt-4 border-t border-gray-200 dark:border-gray-600">
+            <button
+              onClick={handleSaveProperty}
+              className="w-full px-4 py-3 bg-primary-500 text-white rounded-md hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 font-medium transition-colors shadow-sm"
+            >
+              💾 Save Property
+            </button>
+            <p className="mt-2 text-xs text-center text-gray-500 dark:text-gray-400">
+              Save this property to view later in the Saved tab
             </p>
           </div>
         </div>
